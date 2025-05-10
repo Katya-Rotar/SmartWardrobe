@@ -1,4 +1,6 @@
 using DAL.Context;
+using DAL.Repositories;
+using DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -17,6 +19,8 @@ builder.Services.AddDbContext<WardrobeDbContext>(options =>
     options.UseNpgsql(connectionString).UseSnakeCaseNamingConvention();
 });
 
+// Repositories + UoW
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 var app = builder.Build();
 
 // Apply migrations
