@@ -4,13 +4,13 @@ public class Profile
 {
     public int Id { get; set; }
     
-    public int UserID { get; private set; }
+    public int UserID { get; set; }
 
-    public string Username { get; private set; }
+    public string Username { get; set; }
 
-    public string? ProfileImage { get; private set; }
+    public string? ProfileImage { get; set; }
 
-    public string? Bio { get; private set; }
+    public string? Bio { get; set; }
     
     public User? User { get; set; }
     

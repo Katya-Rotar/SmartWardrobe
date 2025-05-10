@@ -4,13 +4,13 @@ public class Publication
 {
     public int Id { get; set; }
     
-    public int ProfileID { get; private set; }
+    public int ProfileID { get; set; }
 
-    public int OutfitID { get; private set; }
+    public int OutfitID { get; set; }
 
-    public string ImageURL { get; private set; }
+    public string ImageURL { get; set; }
 
-    public bool CommentingOptions { get; private set; }
+    public bool CommentingOptions { get; set; }
     
     public Profile? Profile { get; set; }
     public Outfit? Outfit { get; set; }

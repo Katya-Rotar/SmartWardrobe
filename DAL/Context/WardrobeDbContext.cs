@@ -1,4 +1,5 @@
 ﻿using DAL.Context.Configuration;
+using DAL.Seeding;
 
 namespace DAL.Context;
 using DAL.Entities;
@@ -70,5 +71,34 @@ public class WardrobeDbContext : DbContext
         modelBuilder.ApplyConfiguration(new CommentLikeConfiguration());
         modelBuilder.ApplyConfiguration(new FollowerConfiguration());
         modelBuilder.ApplyConfiguration(new NotificationConfiguration());
+
+        modelBuilder.Entity<Category>().HasData(DataSeeder.GenerateCategories());
+        modelBuilder.Entity<ClothingItem>().HasData(DataSeeder.GenerateClothingItems());
+        modelBuilder.Entity<ClothingItemSeason>().HasData(DataSeeder.GenerateClothingItemSeasons());
+        modelBuilder.Entity<ClothingItemStyle>().HasData(DataSeeder.GenerateClothingItemStyles());
+        modelBuilder.Entity<Comment>().HasData(DataSeeder.GenerateComments());
+        modelBuilder.Entity<CommentLike>().HasData(DataSeeder.GenerateCommentLikes());
+        modelBuilder.Entity<Event>().HasData(DataSeeder.GenerateEvents());
+        modelBuilder.Entity<Follower>().HasData(DataSeeder.GenerateFollowers());
+        modelBuilder.Entity<Notification>().HasData(DataSeeder.GenerateNotifications());
+        modelBuilder.Entity<Outfit>().HasData(DataSeeder.GenerateOutfits());
+        modelBuilder.Entity<OutfitGroup>().HasData(DataSeeder.GenerateOutfitGroups());
+        modelBuilder.Entity<OutfitGroupItem>().HasData(DataSeeder.GenerateOutfitGroupItems());
+        modelBuilder.Entity<OutfitItem>().HasData(DataSeeder.GenerateOutfitItems());
+        modelBuilder.Entity<OutfitSeason>().HasData(DataSeeder.GenerateOutfitSeasons());
+        modelBuilder.Entity<OutfitStyle>().HasData(DataSeeder.GenerateOutfitStyles());
+        modelBuilder.Entity<OutfitTag>().HasData(DataSeeder.GenerateOutfitTags());
+        modelBuilder.Entity<PostLike>().HasData(DataSeeder.GeneratePostLikes());
+        modelBuilder.Entity<Profile>().HasData(DataSeeder.GenerateProfiles());
+        modelBuilder.Entity<Publication>().HasData(DataSeeder.GeneratePublications());
+        modelBuilder.Entity<PublicationTag>().HasData(DataSeeder.GeneratePublicationTags());
+        modelBuilder.Entity<SavedPost>().HasData(DataSeeder.GenerateSavedPosts());
+        modelBuilder.Entity<Season>().HasData(DataSeeder.GenerateSeasons());
+        modelBuilder.Entity<Style>().HasData(DataSeeder.GenerateStyles());
+        modelBuilder.Entity<Tag>().HasData(DataSeeder.GenerateTags());
+        modelBuilder.Entity<TemperatureSuitability>().HasData(DataSeeder.GenerateTemperatureSuitabilities());
+        modelBuilder.Entity<Type>().HasData(DataSeeder.GenerateTypes());
+        modelBuilder.Entity<TypeCategory>().HasData(DataSeeder.GenerateTypeCategories());
+        modelBuilder.Entity<User>().HasData(DataSeeder.GenerateUsers());
     }
 }

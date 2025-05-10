@@ -4,9 +4,9 @@ public class OutfitTag
 {
     public int Id { get; set; }
     
-    public int OutfitID { get; private set; }
+    public int OutfitID { get; set; }
 
-    public int TagID { get; private set; }
+    public int TagID { get; set; }
     
     public Outfit? Outfit { get; set; }
     public Tag? Tag { get; set; }

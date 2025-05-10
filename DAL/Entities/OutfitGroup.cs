@@ -4,13 +4,13 @@ public class OutfitGroup
 {
     public int Id { get; set; }
     
-    public int UserID { get; private set; }
+    public int UserID { get; set; }
 
-    public string GroupName { get; private set; }
+    public string GroupName { get; set; }
 
-    public string? Description { get; private set; }
+    public string? Description { get; set; }
 
-    public DateTime CreatedAt { get; private set; } 
+    public DateTime CreatedAt { get; set; } 
     
     public User? User { get; set; }
     

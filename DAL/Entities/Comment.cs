@@ -4,13 +4,13 @@ public class Comment
 {
     public int Id { get; set; }
     
-    public int ProfileID { get; private set; }
+    public int ProfileID { get; set; }
 
-    public int PublicationID { get; private set; }
+    public int PublicationID { get; set; }
 
-    public string Content { get; private set; }
+    public string Content { get; set; }
 
-    public DateTime CreatedAt { get; private set; }
+    public DateTime CreatedAt { get; set; }
     
     public Profile? Profile { get; set; }
     public Publication? Publication { get; set; }

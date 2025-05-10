@@ -4,15 +4,15 @@ public class User
 {
     public int Id { get; set; }
     
-    public string Username { get; private set; }
+    public string Username { get; set; }
 
-    public string? ProfileImage { get; private set; }
+    public string? ProfileImage { get; set; }
 
-    public string PasswordHash { get; private set; }
+    public string PasswordHash { get; set; }
 
-    public string Email { get; private set; }
+    public string Email { get; set; }
 
-    public string Role { get; private set; }
+    public string Role { get; set; }
     
     public IEnumerable<OutfitGroup> OutfitGroups { get; set; } = new List<OutfitGroup>();
     public IEnumerable<Outfit> Outfits { get; set; } = new List<Outfit>();

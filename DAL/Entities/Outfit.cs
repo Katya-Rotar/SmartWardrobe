@@ -4,9 +4,9 @@ public class Outfit
 {
     public int Id { get; set; }
     
-    public int UserID { get; private set; }
+    public int UserID { get; set; }
 
-    public int TemperatureSuitabilityID { get; private set; }
+    public int TemperatureSuitabilityID { get; set; }
     
     public User? User { get; set; }
     public TemperatureSuitability? TemperatureSuitability { get; set; }

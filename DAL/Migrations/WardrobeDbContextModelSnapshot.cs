@@ -41,6 +41,38 @@ namespace DAL.Migrations
                         .HasName("pk_categories");
 
                     b.ToTable("categories", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryName = "Outerwear"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryName = "Tops"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryName = "Bottoms"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryName = "Dresses"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CategoryName = "Shoes"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CategoryName = "Accessories"
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.ClothingItem", b =>
@@ -105,6 +137,55 @@ namespace DAL.Migrations
                         .HasDatabaseName("ix_clothing_items_user_id");
 
                     b.ToTable("clothing_items", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryID = 1,
+                            Color = "Blue",
+                            ImageURL = "https://e7.pngegg.com/pngimages/324/140/png-clipart-blue-washed-denim-button-up-jacket-jean-jacket-denim-h-m-jeans-women-s-jackets-blue-women-accessories-thumbnail.png",
+                            LastWornDate = new DateTime(2025, 5, 6, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Name = "Blue Denim Jacket",
+                            TemperatureSuitabilityID = 4,
+                            TypeID = 1,
+                            UserID = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryID = 2,
+                            Color = "White",
+                            ImageURL = "https://png.pngtree.com/png-clipart/20230930/original/pngtree-white-t-shirt-mockup-realistic-t-shirt-png-image_13020297.png",
+                            LastWornDate = new DateTime(2025, 5, 10, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Name = "White T-Shirt",
+                            TemperatureSuitabilityID = 5,
+                            TypeID = 3,
+                            UserID = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryID = 3,
+                            Color = "Black",
+                            ImageURL = "https://www.pngpacks.com/uploads/data/2058/IMG_bbgqbicsmHvp.png",
+                            LastWornDate = new DateTime(2025, 5, 11, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Name = "Black Jeans",
+                            TemperatureSuitabilityID = 4,
+                            TypeID = 6,
+                            UserID = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryID = 4,
+                            Color = "Yellow",
+                            ImageURL = "https://e7.pngegg.com/pngimages/826/743/png-clipart-cocktail-dress-skirt-gown-dirndl-summer-clothes-fashion-party-dress-thumbnail.png",
+                            Name = "Summer Dress",
+                            TemperatureSuitabilityID = 5,
+                            TypeID = 11,
+                            UserID = 1
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.ClothingItemSeason", b =>
@@ -134,6 +215,32 @@ namespace DAL.Migrations
                         .HasDatabaseName("ix_clothing_item_seasons_season_id");
 
                     b.ToTable("clothing_item_seasons", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClothingItemID = 1,
+                            SeasonID = 4
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ClothingItemID = 2,
+                            SeasonID = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ClothingItemID = 3,
+                            SeasonID = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ClothingItemID = 4,
+                            SeasonID = 2
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.ClothingItemStyle", b =>
@@ -163,6 +270,32 @@ namespace DAL.Migrations
                         .HasDatabaseName("ix_clothing_item_styles_style_id");
 
                     b.ToTable("clothing_item_styles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClothingItemID = 1,
+                            StyleID = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ClothingItemID = 2,
+                            StyleID = 3
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ClothingItemID = 3,
+                            StyleID = 2
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ClothingItemID = 4,
+                            StyleID = 1
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.Comment", b =>
@@ -202,6 +335,24 @@ namespace DAL.Migrations
                         .HasDatabaseName("ix_comments_publication_id");
 
                     b.ToTable("comments", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Content = "Great outfit!",
+                            CreatedAt = new DateTime(2025, 5, 10, 0, 0, 0, 0, DateTimeKind.Utc),
+                            ProfileID = 1,
+                            PublicationID = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Content = "Where did you get those shoes?",
+                            CreatedAt = new DateTime(2025, 5, 7, 0, 0, 0, 0, DateTimeKind.Utc),
+                            ProfileID = 2,
+                            PublicationID = 1
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.CommentLike", b =>
@@ -231,6 +382,20 @@ namespace DAL.Migrations
                         .HasDatabaseName("ix_comment_likes_profile_id");
 
                     b.ToTable("comment_likes", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CommentID = 1,
+                            ProfileID = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CommentID = 2,
+                            ProfileID = 1
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.Event", b =>
@@ -282,6 +447,37 @@ namespace DAL.Migrations
                         .HasDatabaseName("ix_events_user_id");
 
                     b.ToTable("events", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Date = new DateTime(2025, 6, 20, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DressCode = "Formal",
+                            Location = "Lviv",
+                            Name = "Friend's Wedding",
+                            OutfitID = 1,
+                            UserID = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Date = new DateTime(2025, 7, 5, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DressCode = "Business Casual",
+                            Location = "Kyiv",
+                            Name = "Office Party",
+                            OutfitID = 2,
+                            UserID = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Date = new DateTime(2025, 8, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DressCode = "Casual",
+                            Location = "Park",
+                            Name = "Birthday Picnic",
+                            UserID = 1
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.Follower", b =>
@@ -315,6 +511,22 @@ namespace DAL.Migrations
                         .HasDatabaseName("ix_followers_following_id");
 
                     b.ToTable("followers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2025, 4, 30, 0, 0, 0, 0, DateTimeKind.Utc),
+                            FollowerID = 1,
+                            FollowingID = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2025, 5, 3, 0, 0, 0, 0, DateTimeKind.Utc),
+                            FollowerID = 2,
+                            FollowingID = 1
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.Notification", b =>
@@ -352,6 +564,24 @@ namespace DAL.Migrations
                         .HasDatabaseName("ix_notifications_user_id");
 
                     b.ToTable("notifications", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2025, 5, 8, 0, 0, 0, 0, DateTimeKind.Utc),
+                            EventID = 1,
+                            IsRead = false,
+                            UserID = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2025, 5, 5, 0, 0, 0, 0, DateTimeKind.Utc),
+                            EventID = 2,
+                            IsRead = true,
+                            UserID = 1
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.Outfit", b =>
@@ -381,6 +611,20 @@ namespace DAL.Migrations
                         .HasDatabaseName("ix_outfits_user_id");
 
                     b.ToTable("outfits", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            TemperatureSuitabilityID = 1,
+                            UserID = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            TemperatureSuitabilityID = 2,
+                            UserID = 1
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.OutfitGroup", b =>
@@ -418,6 +662,22 @@ namespace DAL.Migrations
                         .HasDatabaseName("ix_outfit_groups_user_id");
 
                     b.ToTable("outfit_groups", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2025, 5, 10, 0, 0, 0, 0, DateTimeKind.Utc),
+                            GroupName = "Casual Summer",
+                            UserID = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2025, 5, 10, 0, 0, 0, 0, DateTimeKind.Utc),
+                            GroupName = "Formal Evening",
+                            UserID = 1
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.OutfitGroupItem", b =>
@@ -447,6 +707,14 @@ namespace DAL.Migrations
                         .HasDatabaseName("ix_outfit_group_items_outfit_id");
 
                     b.ToTable("outfit_group_items", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            OutfitGroupID = 1,
+                            OutfitID = 1
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.OutfitItem", b =>
@@ -476,6 +744,26 @@ namespace DAL.Migrations
                         .HasDatabaseName("ix_outfit_items_outfit_id");
 
                     b.ToTable("outfit_items", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClothingItemID = 2,
+                            OutfitID = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ClothingItemID = 3,
+                            OutfitID = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ClothingItemID = 4,
+                            OutfitID = 2
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.OutfitSeason", b =>
@@ -505,6 +793,20 @@ namespace DAL.Migrations
                         .HasDatabaseName("ix_outfit_seasons_season_id");
 
                     b.ToTable("outfit_seasons", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            OutfitID = 1,
+                            SeasonID = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            OutfitID = 2,
+                            SeasonID = 2
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.OutfitStyle", b =>
@@ -534,6 +836,20 @@ namespace DAL.Migrations
                         .HasDatabaseName("ix_outfit_styles_style_id");
 
                     b.ToTable("outfit_styles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            OutfitID = 1,
+                            StyleID = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            OutfitID = 2,
+                            StyleID = 1
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.OutfitTag", b =>
@@ -563,6 +879,26 @@ namespace DAL.Migrations
                         .HasDatabaseName("ix_outfit_tags_tag_id");
 
                     b.ToTable("outfit_tags", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            OutfitID = 1,
+                            TagID = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            OutfitID = 1,
+                            TagID = 3
+                        },
+                        new
+                        {
+                            Id = 3,
+                            OutfitID = 2,
+                            TagID = 3
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.PostLike", b =>
@@ -592,6 +928,20 @@ namespace DAL.Migrations
                         .HasDatabaseName("ix_post_likes_publication_id");
 
                     b.ToTable("post_likes", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ProfileID = 1,
+                            PublicationID = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ProfileID = 2,
+                            PublicationID = 1
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.Profile", b =>
@@ -631,6 +981,24 @@ namespace DAL.Migrations
                         .HasDatabaseName("ix_profiles_user_id");
 
                     b.ToTable("profiles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Bio = "Lover of vintage style and cozy sweaters.",
+                            ProfileImage = "https://i.pinimg.com/564x/39/33/f6/3933f64de1724bb67264818810e3f2cb.jpg",
+                            UserID = 1,
+                            Username = "fashionlover123"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Bio = "Streetwear is my passion.",
+                            ProfileImage = "https://cdn.expertphotography.com/wp-content/uploads/2020/08/social-media-profile-photos.jpg",
+                            UserID = 2,
+                            Username = "Anna"
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.Publication", b =>
@@ -670,6 +1038,16 @@ namespace DAL.Migrations
                         .HasDatabaseName("ix_publications_profile_id");
 
                     b.ToTable("publications", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CommentingOptions = true,
+                            ImageURL = "https://fashionjackson.com/wp-content/uploads/2017/06/Fashion-Jackson-Everlane-White-Tshirt-Zara-Ripped-Black-Skinny-Jeans.jpg",
+                            OutfitID = 1,
+                            ProfileID = 1
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.PublicationTag", b =>
@@ -699,6 +1077,20 @@ namespace DAL.Migrations
                         .HasDatabaseName("ix_publication_tags_tag_id");
 
                     b.ToTable("publication_tags", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            PublicationID = 1,
+                            TagID = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            PublicationID = 1,
+                            TagID = 3
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.SavedPost", b =>
@@ -728,6 +1120,14 @@ namespace DAL.Migrations
                         .HasDatabaseName("ix_saved_posts_publication_id");
 
                     b.ToTable("saved_posts", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ProfileID = 1,
+                            PublicationID = 1
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.Season", b =>
@@ -749,6 +1149,28 @@ namespace DAL.Migrations
                         .HasName("pk_seasons");
 
                     b.ToTable("seasons", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            SeasonName = "Spring"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            SeasonName = "Summer"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            SeasonName = "Autumn"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            SeasonName = "Winter"
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.Style", b =>
@@ -770,6 +1192,33 @@ namespace DAL.Migrations
                         .HasName("pk_styles");
 
                     b.ToTable("styles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            StyleName = "Casual"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            StyleName = "Formal"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            StyleName = "Sporty"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            StyleName = "Party"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            StyleName = "Vintage"
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.Tag", b =>
@@ -791,6 +1240,33 @@ namespace DAL.Migrations
                         .HasName("pk_tags");
 
                     b.ToTable("tags", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            TagName = "Casual"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            TagName = "Formal"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            TagName = "Summer"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            TagName = "Winter"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            TagName = "Athletic"
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.TemperatureSuitability", b =>
@@ -812,6 +1288,38 @@ namespace DAL.Migrations
                         .HasName("pk_temperature_suitabilities");
 
                     b.ToTable("temperature_suitabilities", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            TemperatureSuitabilityName = "Extra could (-30 to -20)"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            TemperatureSuitabilityName = "Very cold (-20 to -10)"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            TemperatureSuitabilityName = "Cold (-10 to 0)"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            TemperatureSuitabilityName = "Chilly (0 to +10)"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            TemperatureSuitabilityName = "Warm (+10 to +20)"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            TemperatureSuitabilityName = "Hot (+20 to +30)"
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.Type", b =>
@@ -833,6 +1341,78 @@ namespace DAL.Migrations
                         .HasName("pk_types");
 
                     b.ToTable("types", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            TypeName = "Jacket"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            TypeName = "Coat"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            TypeName = "T-Shirt"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            TypeName = "Blouse"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            TypeName = "Sweatshirt"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            TypeName = "Jeans"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            TypeName = "Trousers"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            TypeName = "Shorts"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            TypeName = "Evening Dress"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            TypeName = "Casual Dress"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            TypeName = "Sundress"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            TypeName = "Sneakers"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            TypeName = "Boots"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            TypeName = "Heels"
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.TypeCategory", b =>
@@ -862,6 +1442,92 @@ namespace DAL.Migrations
                         .HasDatabaseName("ix_type_categories_type_id");
 
                     b.ToTable("type_categories", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryID = 1,
+                            TypeID = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryID = 1,
+                            TypeID = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryID = 2,
+                            TypeID = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryID = 2,
+                            TypeID = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CategoryID = 2,
+                            TypeID = 5
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CategoryID = 3,
+                            TypeID = 6
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CategoryID = 3,
+                            TypeID = 7
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CategoryID = 3,
+                            TypeID = 8
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CategoryID = 4,
+                            TypeID = 9
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CategoryID = 4,
+                            TypeID = 10
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CategoryID = 4,
+                            TypeID = 11
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CategoryID = 5,
+                            TypeID = 12
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CategoryID = 5,
+                            TypeID = 13
+                        },
+                        new
+                        {
+                            Id = 14,
+                            CategoryID = 5,
+                            TypeID = 14
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.User", b =>
@@ -905,6 +1571,34 @@ namespace DAL.Migrations
                         .HasName("pk_users");
 
                     b.ToTable("users", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "katya@gmail.com",
+                            PasswordHash = "katyaPassword",
+                            ProfileImage = "https://i.pinimg.com/564x/39/33/f6/3933f64de1724bb67264818810e3f2cb.jpg",
+                            Role = "Premium",
+                            Username = "Katya"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Email = "anna@gmail.com",
+                            PasswordHash = "AnnaPassword",
+                            ProfileImage = "https://cdn.expertphotography.com/wp-content/uploads/2020/08/social-media-profile-photos.jpg",
+                            Role = "User",
+                            Username = "Anna"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Email = "Admin@gmail.com",
+                            PasswordHash = "Admin",
+                            Role = "Admin",
+                            Username = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.ClothingItem", b =>
