@@ -2,6 +2,7 @@
 
 public interface IUnitOfWork : IDisposable
 {
+    IClothingItemRepository ClothingItems { get; }
     Task SaveAsync();
     Task BeginTransactionAsync(CancellationToken cancellationToken);
     Task CommitTransactionAsync(CancellationToken cancellationToken);
