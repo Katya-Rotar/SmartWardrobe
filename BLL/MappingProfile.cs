@@ -1,9 +1,11 @@
 ﻿using BLL.DTO;
 using BLL.DTO.Category;
+using BLL.DTO.Type;
 using BLL.Helpers.Mapping;
 using DAL.Entities;
 using DAL.Helpers;
 using Profile = AutoMapper.Profile;
+using Type = DAL.Entities.Type;
 
 namespace BLL;
 
@@ -24,5 +26,6 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.SeasonNames, opt => opt.MapFrom(src => src.Seasons.Select(s => s.Season.SeasonName)));
         
         CreateMap<Category, CategoryDto>().ReverseMap();
+        CreateMap<Type, TypeDto>().ReverseMap();
     }
 }

@@ -32,10 +32,12 @@ builder.Services.AddScoped(typeof(ISearchHelper<>), typeof(SearchHelper<>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IClothingItemRepository, ClothingItemRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ITypeRepository, TypeRepository>();
 
 // Services
 builder.Services.AddScoped<IClothingItemService, ClothingItemService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ITypeService, TypeService>();
 
 var app = builder.Build();
 
