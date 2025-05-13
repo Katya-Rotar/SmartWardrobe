@@ -10,12 +10,14 @@ public class UnitOfWork : IUnitOfWork
     private IDbContextTransaction _transaction;
     
     public IClothingItemRepository ClothingItems { get; }
+    public ICategoryRepository Categories { get; }
 
     public UnitOfWork(WardrobeDbContext context,
-        IClothingItemRepository clothingItem)
+        IClothingItemRepository clothingItem, ICategoryRepository categories)
     {
         _context = context;
         ClothingItems = clothingItem;
+        Categories = categories;
     }
 
     public void Dispose()

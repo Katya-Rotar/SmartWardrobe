@@ -31,9 +31,11 @@ builder.Services.AddScoped(typeof(ISortHelper<>), typeof(SortHelper<>));
 builder.Services.AddScoped(typeof(ISearchHelper<>), typeof(SearchHelper<>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IClothingItemRepository, ClothingItemRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 // Services
 builder.Services.AddScoped<IClothingItemService, ClothingItemService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 var app = builder.Build();
 

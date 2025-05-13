@@ -1,4 +1,5 @@
 ﻿using BLL.DTO;
+using BLL.DTO.Category;
 using BLL.Helpers.Mapping;
 using DAL.Entities;
 using DAL.Helpers;
@@ -21,5 +22,7 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.TemperatureSuitabilityName, opt => opt.MapFrom(src => src.TemperatureSuitability.TemperatureSuitabilityName))
             .ForMember(dest => dest.StyleNames, opt => opt.MapFrom(src => src.Styles.Select(s => s.Style.StyleName)))
             .ForMember(dest => dest.SeasonNames, opt => opt.MapFrom(src => src.Seasons.Select(s => s.Season.SeasonName)));
+        
+        CreateMap<Category, CategoryDto>().ReverseMap();
     }
 }
