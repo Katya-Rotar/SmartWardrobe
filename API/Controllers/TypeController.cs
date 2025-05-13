@@ -21,5 +21,13 @@ namespace API.Controllers
             var type = await _typeService.GetAll();
             return Ok(type);
         }
+        
+        [HttpGet("by-category/{categoryId}")]
+        public async Task<IActionResult> GetTypesByCategory(int categoryId)
+        {
+            var types = await _typeService.GetTypesByCategoryIdAsync(categoryId);
+            return Ok(types);
+        }
+
     }
 }
