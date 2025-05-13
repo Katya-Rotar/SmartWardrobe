@@ -33,11 +33,13 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IClothingItemRepository, ClothingItemRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ITypeRepository, TypeRepository>();
+builder.Services.AddScoped<ITemperatureSuitabilityRepository, TemperatureSuitabilityRepository>();
 
 // Services
 builder.Services.AddScoped<IClothingItemService, ClothingItemService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ITypeService, TypeService>();
+builder.Services.AddScoped<ITemperatureSuitabilityService, TemperatureSuitabilityService>();
 
 var app = builder.Build();
 
