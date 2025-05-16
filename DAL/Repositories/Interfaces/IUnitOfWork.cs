@@ -6,6 +6,7 @@ public interface IUnitOfWork : IDisposable
     ICategoryRepository Categories { get; }
     ITypeRepository Types { get; }
     ITemperatureSuitabilityRepository TemperatureSuitability { get; }
+    IStyleRepository Styles { get; }
     Task SaveAsync();
     Task BeginTransactionAsync(CancellationToken cancellationToken);
     Task CommitTransactionAsync(CancellationToken cancellationToken);

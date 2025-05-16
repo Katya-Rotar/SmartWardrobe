@@ -1,5 +1,6 @@
 ﻿using BLL.DTO;
 using BLL.DTO.Category;
+using BLL.DTO.Style;
 using BLL.DTO.TemperatureSuitability;
 using BLL.DTO.Type;
 using BLL.Helpers.Mapping;
@@ -29,5 +30,6 @@ public class MappingProfile : Profile
         CreateMap<Category, CategoryDto>().ReverseMap();
         CreateMap<Type, TypeDto>().ReverseMap();
         CreateMap<TemperatureSuitability, TemperatureSuitabilityDto>().ReverseMap();
+        CreateMap<Style, StyleDto>().ReverseMap();
     }
 }
