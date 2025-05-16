@@ -35,6 +35,7 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ITypeRepository, TypeRepository>();
 builder.Services.AddScoped<ITemperatureSuitabilityRepository, TemperatureSuitabilityRepository>();
 builder.Services.AddScoped<IStyleRepository, StyleRepository>();
+builder.Services.AddScoped<ISeasonRepository, SeasonRepository>();
 
 
 // Services
@@ -43,6 +44,7 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ITypeService, TypeService>();
 builder.Services.AddScoped<ITemperatureSuitabilityService, TemperatureSuitabilityService>();
 builder.Services.AddScoped<IStyleService, StyleService>();
+builder.Services.AddScoped<ISeasonService, SeasonService>();
 
 var app = builder.Build();
 

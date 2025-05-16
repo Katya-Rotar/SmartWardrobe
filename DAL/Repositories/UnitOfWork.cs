@@ -14,10 +14,12 @@ public class UnitOfWork : IUnitOfWork
     public ITypeRepository Types { get; }
     public ITemperatureSuitabilityRepository TemperatureSuitability { get; }
     public IStyleRepository Styles { get; }
+    public ISeasonRepository Seasons { get; }
 
     public UnitOfWork(WardrobeDbContext context,
         IClothingItemRepository clothingItem, ICategoryRepository categories, ITypeRepository types, 
-        ITemperatureSuitabilityRepository temperatureSuitability, IStyleRepository styles)
+        ITemperatureSuitabilityRepository temperatureSuitability, IStyleRepository styles,
+        ISeasonRepository seasons)
     {
         _context = context;
         ClothingItems = clothingItem;
@@ -25,6 +27,7 @@ public class UnitOfWork : IUnitOfWork
         Types = types;
         TemperatureSuitability = temperatureSuitability;
         Styles = styles;
+        Seasons = seasons;
     }
 
     public void Dispose()
