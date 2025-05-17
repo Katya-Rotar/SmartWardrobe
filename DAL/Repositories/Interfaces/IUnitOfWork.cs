@@ -8,6 +8,7 @@ public interface IUnitOfWork : IDisposable
     ITemperatureSuitabilityRepository TemperatureSuitability { get; }
     IStyleRepository Styles { get; }
     ISeasonRepository Seasons { get; }
+    ITagRepository Tags { get; }
     Task SaveAsync();
     Task BeginTransactionAsync(CancellationToken cancellationToken);
     Task CommitTransactionAsync(CancellationToken cancellationToken);

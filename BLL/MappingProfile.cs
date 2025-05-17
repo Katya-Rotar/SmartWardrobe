@@ -2,6 +2,7 @@
 using BLL.DTO.Category;
 using BLL.DTO.Season;
 using BLL.DTO.Style;
+using BLL.DTO.Tag;
 using BLL.DTO.TemperatureSuitability;
 using BLL.DTO.Type;
 using BLL.Helpers.Mapping;
@@ -33,5 +34,7 @@ public class MappingProfile : Profile
         CreateMap<TemperatureSuitability, TemperatureSuitabilityDto>().ReverseMap();
         CreateMap<Style, StyleDto>().ReverseMap();
         CreateMap<Season, SeasonDto>().ReverseMap();
+        CreateMap<Tag, TagDto>().ReverseMap();
+        CreateMap<Tag, CreateTagDto>().ReverseMap();
     }
 }
