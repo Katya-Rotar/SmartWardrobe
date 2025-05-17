@@ -9,6 +9,7 @@ public interface IUnitOfWork : IDisposable
     IStyleRepository Styles { get; }
     ISeasonRepository Seasons { get; }
     ITagRepository Tags { get; }
+    IOutfitRepository Outfits { get; }
     Task SaveAsync();
     Task BeginTransactionAsync(CancellationToken cancellationToken);
     Task CommitTransactionAsync(CancellationToken cancellationToken);

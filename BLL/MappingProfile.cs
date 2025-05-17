@@ -1,5 +1,6 @@
 ﻿using BLL.DTO;
 using BLL.DTO.Category;
+using BLL.DTO.Outfit;
 using BLL.DTO.Season;
 using BLL.DTO.Style;
 using BLL.DTO.Tag;
@@ -36,5 +37,19 @@ public class MappingProfile : Profile
         CreateMap<Season, SeasonDto>().ReverseMap();
         CreateMap<Tag, TagDto>().ReverseMap();
         CreateMap<Tag, CreateTagDto>().ReverseMap();
+        
+        CreateMap<ClothingItem, OutfitItemsDto>()
+            .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+            .ForMember(dest => dest.ImageURL, opt => opt.MapFrom(src => src.ImageURL))
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id));
+
+        CreateMap<Outfit, OutfitDto>()
+            .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => src.Tags.Select(s => s.Tag.TagName)))
+            .ForMember(dest => dest.GroupNames, opt => opt.MapFrom(src => src.GroupItems.Select(s => s.OutfitGroup.GroupName)))
+            .ForMember(dest => dest.ItemNames, opt => opt.MapFrom(src => src.Items.Select(i => i.ClothingItem)))
+            .ForMember(dest => dest.TemperatureSuitabilityName, opt => opt.MapFrom(src => src.TemperatureSuitability.TemperatureSuitabilityName))
+            .ForMember(dest => dest.StyleNames, opt => opt.MapFrom(src => src.Styles.Select(s => s.Style.StyleName)))
+            .ForMember(dest => dest.SeasonNames, opt => opt.MapFrom(src => src.Seasons.Select(s => s.Season.SeasonName)));
+
     }
 }
