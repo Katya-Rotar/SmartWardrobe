@@ -10,4 +10,7 @@ public interface IOutfitService
     PagedList<OutfitDto> GetAllOutfit(OutfitParams parameters);
     Task<OutfitDto?> GetOutfitDetailsAsync(int id);
     Task<IEnumerable<OutfitDto>> GetOutfitsByItemIdAsync(int itemId);
+    Task<int> CreateOutfitAsync(CreateOutfitDto dto, CancellationToken cancellationToken);
+    Task UpdateOutfitAsync(UpdateOutfitDto outfitDto, CancellationToken cancellationToken);
+    Task DeleteOutfitAsync(int id, CancellationToken cancellationToken);
 }
