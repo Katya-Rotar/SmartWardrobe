@@ -29,5 +29,12 @@ namespace API.Controllers
             return Ok(types);
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<TypeDto>> GetTypeById(int id)
+        {
+            var tag = await _typeService.GetTypeAsync(id);
+            return Ok(tag);
+        }
+        
     }
 }

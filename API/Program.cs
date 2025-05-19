@@ -50,6 +50,17 @@ builder.Services.AddScoped<ISeasonService, SeasonService>();
 builder.Services.AddScoped<ITagService, TagService>();
 builder.Services.AddScoped<IOutfitService, OutfitService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactLocalhost",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:3000")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
+
 var app = builder.Build();
 
 // Apply migrations
@@ -64,6 +75,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("AllowReactLocalhost");
 
 app.MapControllers();
 
