@@ -4,5 +4,5 @@ namespace DAL.Repositories.Interfaces;
 
 public interface IUserRepository : IGenericRepository<User>
 {
-    Task<User> AuthenticateAsync(string login, string password);
+    Task<User> AuthenticateAsync(string email);
 }
