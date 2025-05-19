@@ -6,6 +6,7 @@ using DAL.Helpers.Search;
 using DAL.Helpers.Sorting;
 using DAL.Repositories;
 using DAL.Repositories.Interfaces;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +27,10 @@ builder.Services.AddDbContext<WardrobeDbContext>(options =>
 //AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
+//Fluent validation
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddFluentValidationClientsideAdapters();
+
 // Repositories + UoW
 builder.Services.AddScoped(typeof(ISortHelper<>), typeof(SortHelper<>));
 builder.Services.AddScoped(typeof(ISearchHelper<>), typeof(SearchHelper<>));
@@ -39,6 +44,7 @@ builder.Services.AddScoped<ISeasonRepository, SeasonRepository>();
 builder.Services.AddScoped<ITagRepository, TagRepository>();
 builder.Services.AddScoped<IOutfitRepository, OutfitRepository>();
 builder.Services.AddScoped<IOutfitGroupRepository, OutfitGroupRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 // Services
 builder.Services.AddScoped<IClothingItemService, ClothingItemService>();
@@ -50,6 +56,7 @@ builder.Services.AddScoped<ISeasonService, SeasonService>();
 builder.Services.AddScoped<ITagService, TagService>();
 builder.Services.AddScoped<IOutfitService, OutfitService>();
 builder.Services.AddScoped<IOutfitGroupService, OutfitGroupService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddCors(options =>
 {
