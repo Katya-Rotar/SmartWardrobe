@@ -1,4 +1,5 @@
 using BLL;
+using System.Text;
 using BLL.Services;
 using BLL.Services.Interfaces;
 using DAL.Context;
@@ -7,14 +8,43 @@ using DAL.Helpers.Sorting;
 using DAL.Repositories;
 using DAL.Repositories.Interfaces;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+//Swagger
+builder.Services.AddSwaggerGen(c =>
+{
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please enter the Bearer token",
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey
+    });
+    
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
+});
 
 // Database
 var connectionString = builder.Configuration.GetConnectionString("PgsqlConnection");
@@ -68,6 +98,23 @@ builder.Services.AddCors(options =>
                   .AllowAnyMethod();
         });
 });
+
+// Add services to the container
+var key = Encoding.UTF8.GetBytes("W8zDp4x2mY9vK6nF3qR7tW5eX2aZ7pU6sQ9bJ4vL2cT8nR5oX3kV6rP7mY2qJ9");
+builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(key)
+        };
+    });
 
 var app = builder.Build();
 
