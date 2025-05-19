@@ -38,7 +38,7 @@ builder.Services.AddScoped<IStyleRepository, StyleRepository>();
 builder.Services.AddScoped<ISeasonRepository, SeasonRepository>();
 builder.Services.AddScoped<ITagRepository, TagRepository>();
 builder.Services.AddScoped<IOutfitRepository, OutfitRepository>();
-
+builder.Services.AddScoped<IOutfitGroupRepository, OutfitGroupRepository>();
 
 // Services
 builder.Services.AddScoped<IClothingItemService, ClothingItemService>();
@@ -49,6 +49,7 @@ builder.Services.AddScoped<IStyleService, StyleService>();
 builder.Services.AddScoped<ISeasonService, SeasonService>();
 builder.Services.AddScoped<ITagService, TagService>();
 builder.Services.AddScoped<IOutfitService, OutfitService>();
+builder.Services.AddScoped<IOutfitGroupService, OutfitGroupService>();
 
 builder.Services.AddCors(options =>
 {
