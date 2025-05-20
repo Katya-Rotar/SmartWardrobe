@@ -1,5 +1,6 @@
 using BLL;
 using System.Text;
+using API.Middleware.Exceptions;
 using BLL.Services;
 using BLL.Services.Interfaces;
 using DAL.Context;
@@ -53,6 +54,11 @@ builder.Services.AddDbContext<WardrobeDbContext>(options =>
     options.EnableSensitiveDataLogging();
     options.UseNpgsql(connectionString).UseSnakeCaseNamingConvention();
 });
+
+// Exception Handling
+builder.Services.AddExceptionHandler<NotFoundExceptionHandler>();
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 
 //AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
@@ -132,6 +138,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("AllowReactLocalhost");
+
+app.UseExceptionHandler();
 
 app.UseAuthentication();
 app.UseAuthorization();
