@@ -1,5 +1,6 @@
 ﻿using BLL.DTO.Tag;
 using BLL.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -29,6 +30,7 @@ namespace API.Controllers
             return Ok(tag);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult> AddTagAsync([FromBody] CreateTagDto createTagDto, CancellationToken cancellationToken)
         {

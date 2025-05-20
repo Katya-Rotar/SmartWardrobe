@@ -1,7 +1,9 @@
-﻿using BLL.DTO.Outfit;
+﻿using System.Security.Claims;
+using BLL.DTO.Outfit;
 using BLL.Services.Interfaces;
 using DAL.Helpers;
 using DAL.Helpers.Params;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -18,14 +20,23 @@ namespace API.Controllers
         }
 
         // GET: api/Outfit
+        [Authorize]
         [HttpGet]
         public ActionResult<PagedList<OutfitDto>> GetAllOutfits([FromQuery] OutfitParams parameters)
         {
-            var outfit = _outfitService.GetAllOutfit(parameters);
-            return Ok(outfit);
+            var userIdFromToken = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (userIdFromToken == null || !int.TryParse(userIdFromToken, out var userId))
+                return Unauthorized("Invalid token or user ID.");
+
+            parameters.UserId = userId;
+
+            var outfits = _outfitService.GetAllOutfit(parameters);
+            return Ok(outfits);
         }
 
         // GET: api/Outfit/{id}
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<OutfitDto>> GetOutfitDetails(int id)
         {
@@ -37,6 +48,7 @@ namespace API.Controllers
         }
 
         // GET: api/Outfit/by-item/{itemId}
+        [Authorize]
         [HttpGet("by-item/{itemId}")]
         public async Task<ActionResult<IEnumerable<OutfitDto>>> GetOutfitsByItemId(int itemId)
         {
@@ -44,15 +56,24 @@ namespace API.Controllers
             return Ok(outfits);
         }
         
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult> AddOutfitAsync([FromBody] CreateOutfitDto createOutfitDto, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            
+
+            var userIdFromToken = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (userIdFromToken == null || !int.TryParse(userIdFromToken, out var userId))
+                return Unauthorized("Invalid token or user ID.");
+
+            createOutfitDto.UserID = userId;
+
             var outfitId = await _outfitService.CreateOutfitAsync(createOutfitDto, cancellationToken);
             return CreatedAtAction(nameof(GetOutfitDetails), new { id = outfitId }, createOutfitDto);
         }
         
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateOutfitAsync(int id, [FromBody] UpdateOutfitDto outfitDto, 
             CancellationToken cancellationToken)
@@ -61,6 +82,7 @@ namespace API.Controllers
             return NoContent();
         }
         
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteOutfitAsync(int id, CancellationToken cancellationToken)
         {

@@ -133,6 +133,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("AllowReactLocalhost");
 
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapControllers();
 
 await app.RunAsync();

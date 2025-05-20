@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -25,6 +26,21 @@ public class UserController : ControllerBase
     {
         var user = await _userService.GetUserByIdAsync(id);
         return Ok(user);
+    }
+    
+    [Authorize]
+    [HttpGet("user-info")]
+    public async Task<IActionResult> GetUserById()
+    {
+        var userIdFromToken = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+        if (userIdFromToken != null && int.TryParse(userIdFromToken, out var userId))
+        {
+            var user = await _userService.GetUserByIdAsync(userId);
+            return Ok(user);
+        }
+
+        return Unauthorized("You are not authorized to view this user information.");
     }
 
     [HttpPost]
@@ -71,7 +87,8 @@ public class UserController : ControllerBase
                 Subject = new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.Email, request.Email),
-                    new Claim(ClaimTypes.Role, user.Role)
+                    new Claim(ClaimTypes.Role, user.Role),
+                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -84,5 +101,19 @@ public class UserController : ControllerBase
         }
 
         return Unauthorized("Invalid credentials");
+    }
+    
+    [Authorize]
+    [HttpGet("user-id-from-token")]
+    public IActionResult GetUserIdFromToken()
+    {
+        var userIdFromToken = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+        if (userIdFromToken != null)
+        {
+            return Ok(new { UserId = userIdFromToken });
+        }
+
+        return Unauthorized("Invalid token.");
     }
 }
