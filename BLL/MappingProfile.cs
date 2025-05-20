@@ -1,11 +1,13 @@
 ﻿using BLL.DTO;
 using BLL.DTO.Category;
 using BLL.DTO.Outfit;
+using BLL.DTO.OutfitGroup;
 using BLL.DTO.Season;
 using BLL.DTO.Style;
 using BLL.DTO.Tag;
 using BLL.DTO.TemperatureSuitability;
 using BLL.DTO.Type;
+using BLL.DTO.User;
 using BLL.Helpers.Mapping;
 using DAL.Entities;
 using DAL.Helpers;
@@ -51,5 +53,12 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.StyleNames, opt => opt.MapFrom(src => src.Styles.Select(s => s.Style.StyleName)))
             .ForMember(dest => dest.SeasonNames, opt => opt.MapFrom(src => src.Seasons.Select(s => s.Season.SeasonName)));
 
+        CreateMap<OutfitGroup, OutfitGroupDto>().ReverseMap();
+        CreateMap<OutfitGroup, CreateOutfitGroupDto>().ReverseMap();
+        
+        CreateMap<User, UserDto>().ReverseMap();
+        CreateMap<CreateUserDto, User>().ReverseMap();
+        CreateMap<UpdateUserDto, User>()
+            .ForMember(dto => dto.Role, opt => opt.Ignore());
     }
 }

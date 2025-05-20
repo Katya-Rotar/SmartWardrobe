@@ -15,7 +15,8 @@ services:
 
   smartwardrobe.api:
     build:
-      dockerfile: D:\Курсова\SmartWardrobe\API\Dockerfile
+      context: .
+      dockerfile: API/Dockerfile
     environment:
       ASPNETCORE_HTTP_PORTS: 8080
       ASPNETCORE_ENVIRONMENT: Development

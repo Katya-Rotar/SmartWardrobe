@@ -21,6 +21,12 @@ public class TypeService : ITypeService
         var types = await _unitOfWork.Types.GetAllAsync();
         return _mapper.Map<IEnumerable<TypeDto>>(types);
     }
+    
+    public async Task<TypeDto> GetTypeAsync(int id)
+    {
+        var tag = await _unitOfWork.Types.GetByIdAsync(id);
+        return _mapper.Map<TypeDto>(tag);
+    }
 
     public async Task<IEnumerable<TypeDto>> GetTypesByCategoryIdAsync(int categoryId)
     {
