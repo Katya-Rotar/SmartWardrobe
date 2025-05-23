@@ -53,6 +53,12 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.StyleNames, opt => opt.MapFrom(src => src.Styles.Select(s => s.Style.StyleName)))
             .ForMember(dest => dest.SeasonNames, opt => opt.MapFrom(src => src.Seasons.Select(s => s.Season.SeasonName)));
 
+        CreateMap<Outfit, UpdateOutfitDto>()
+            .ForMember(dest => dest.TagIDs, opt => opt.MapFrom(src => src.Tags.Select(t => t.Id).ToList()))
+            .ForMember(dest => dest.StyleIDs, opt => opt.MapFrom(src => src.Styles.Select(s => s.Id).ToList()))
+            .ForMember(dest => dest.SeasonIDs, opt => opt.MapFrom(src => src.Seasons.Select(se => se.Id).ToList()))
+            .ForMember(dest => dest.ClothingItemIDs, opt => opt.MapFrom(src => src.GroupItems.Select(gi => gi.Id).ToList()));
+        
         CreateMap<OutfitGroup, OutfitGroupDto>().ReverseMap();
         CreateMap<OutfitGroup, CreateOutfitGroupDto>().ReverseMap();
         

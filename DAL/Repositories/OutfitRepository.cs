@@ -58,6 +58,22 @@ public class OutfitRepository : GenericRepository<Outfit>, IOutfitRepository
         return await query;
     }
 
+    public override async Task<Outfit> GetByIdAsync(int id)
+    {
+        var outfit = await context.Outfits
+            .Include(o => o.Styles)
+            .Include(o => o.Seasons)
+            .Include(o => o.Tags)
+            .Include(o => o.GroupItems)
+            .Include(o => o.TemperatureSuitability)
+            .FirstOrDefaultAsync(o => o.Id == id);
+
+        if (outfit == null)
+            throw new KeyNotFoundException($"Outfit with ID {id} not found.");
+
+        return outfit;
+    }
+
     public async Task<IEnumerable<Outfit>> GetOutfitsByItemIdAsync(int itemId)
     {
         return await context.Outfits

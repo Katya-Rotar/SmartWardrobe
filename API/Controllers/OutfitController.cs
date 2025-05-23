@@ -37,10 +37,21 @@ namespace API.Controllers
 
         // GET: api/Outfit/{id}
         [Authorize]
-        [HttpGet("{id}")]
+        [HttpGet("detail/{id}")]
         public async Task<ActionResult<OutfitDto>> GetOutfitDetails(int id)
         {
             var outfit = await _outfitService.GetOutfitDetailsAsync(id);
+            if (outfit == null)
+                return NotFound();
+
+            return Ok(outfit);
+        }
+        
+        [Authorize]
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UpdateOutfitDto>> GetOutfit(int id)
+        {
+            var outfit = await _outfitService.GetOutfitAsync(id);
             if (outfit == null)
                 return NotFound();
 
@@ -78,7 +89,7 @@ namespace API.Controllers
         public async Task<ActionResult> UpdateOutfitAsync(int id, [FromBody] UpdateOutfitDto outfitDto, 
             CancellationToken cancellationToken)
         {
-            await _outfitService.UpdateOutfitAsync(outfitDto, cancellationToken);
+            await _outfitService.UpdateOutfitAsync(id, outfitDto, cancellationToken);
             return NoContent();
         }
         
