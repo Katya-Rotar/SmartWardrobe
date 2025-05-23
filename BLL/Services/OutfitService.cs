@@ -31,6 +31,12 @@ public class OutfitService : IOutfitService
         return _mapper.Map<OutfitDto>(outfit);
     }
 
+    public async Task<UpdateOutfitDto?> GetOutfitAsync(int id)
+    {
+        var outfit = await _unitOfWork.Outfits.GetByIdAsync(id);
+        return _mapper.Map<UpdateOutfitDto>(outfit);
+    }
+
     public async Task<IEnumerable<OutfitDto>> GetOutfitsByItemIdAsync(int itemId)
     {
         var outfit = await _unitOfWork.Outfits.GetOutfitsByItemIdAsync(itemId);
@@ -68,15 +74,15 @@ public class OutfitService : IOutfitService
         }
     }
 
-    public async Task UpdateOutfitAsync(UpdateOutfitDto outfitDto, CancellationToken cancellationToken)
+    public async Task UpdateOutfitAsync(int id, UpdateOutfitDto outfitDto, CancellationToken cancellationToken)
     {
         await _unitOfWork.BeginTransactionAsync(cancellationToken);
         try
         {
-            var outfit = await _unitOfWork.Outfits.GetOutfitDetailsAsync(outfitDto.Id);
+            var outfit = await _unitOfWork.Outfits.GetOutfitDetailsAsync(id);
             if (outfit == null)
                 throw new KeyNotFoundException("Outfit not found");
-        
+
             outfit.TemperatureSuitabilityID = outfitDto.TemperatureSuitabilityID;
 
             outfit.Tags.Clear();
@@ -85,21 +91,14 @@ public class OutfitService : IOutfitService
             outfit.Items.Clear();
             outfit.GroupItems.Clear();
 
-            outfit.Tags = outfitDto.TagIDs.Select(id => new OutfitTag { TagID = id, OutfitID = outfit.Id }).ToList();
-            outfit.Styles = outfitDto.StyleIDs.Select(id => new OutfitStyle { StyleID = id, OutfitID = outfit.Id }).ToList();
-            outfit.Seasons = outfitDto.SeasonIDs.Select(id => new OutfitSeason { SeasonID = id, OutfitID = outfit.Id }).ToList();
-            outfit.Items = outfitDto.ClothingItemIDs.Select(id => new OutfitItem { ClothingItemID = id, OutfitID = outfit.Id }).ToList();
+            outfit.Tags = outfitDto.TagIDs.Select(tagId => new OutfitTag { TagID = tagId, OutfitID = id }).ToList();
+            outfit.Styles = outfitDto.StyleIDs.Select(styleId => new OutfitStyle { StyleID = styleId, OutfitID = id }).ToList();
+            outfit.Seasons = outfitDto.SeasonIDs.Select(seasonId => new OutfitSeason { SeasonID = seasonId, OutfitID = id }).ToList();
+            outfit.Items = outfitDto.ClothingItemIDs.Select(itemId => new OutfitItem { ClothingItemID = itemId, OutfitID = id }).ToList();
 
-            if (outfitDto.OutfitGroupIDs != null && outfitDto.OutfitGroupIDs.Any())
-            {
-                outfit.GroupItems = outfitDto.OutfitGroupIDs
-                    .Select(id => new OutfitGroupItem { OutfitGroupID = id, OutfitID = outfit.Id })
-                    .ToList();
-            }
-            else
-            {
-                outfit.GroupItems = new List<OutfitGroupItem>();
-            }
+            outfit.GroupItems = (outfitDto.OutfitGroupIDs != null && outfitDto.OutfitGroupIDs.Any())
+                ? outfitDto.OutfitGroupIDs.Select(groupId => new OutfitGroupItem { OutfitGroupID = groupId, OutfitID = id }).ToList()
+                : new List<OutfitGroupItem>();
 
             _unitOfWork.Outfits.UpdateAsync(outfit);
             await _unitOfWork.SaveAsync();
